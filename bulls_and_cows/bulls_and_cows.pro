@@ -13,8 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    levelcomplexitydialog.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    levelcomplexitydialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    levelcomplexitydialog.ui
