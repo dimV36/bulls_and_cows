@@ -51,6 +51,22 @@ void MainWindow::UpdateLineAnswer() {
 }
 
 
+QString MainWindow::ValidateEnteredAnswer(QString &answer) const {
+    int bulls = 0;
+    int cows = 0;
+    for (int i = 0; i < generated_value_.length(); i++) {
+        QString digit = generated_value_[i];
+        if (true == answer.contains(digit))
+            cows += 1;
+        if (answer.indexOf(digit) == generated_value_.indexOf(digit)) {
+            cows -= 1;
+            bulls += 1;
+        }
+    }
+    return QString("%1Б %2К").arg(bulls).arg(cows);
+}
+
+
 void MainWindow::on_action_level_complexity_triggered() {
     SetComplexityLevel();
     UpdateLineAnswer();
@@ -59,11 +75,13 @@ void MainWindow::on_action_level_complexity_triggered() {
 
 void MainWindow::on_line_answer__returnPressed() {
     QString answer = ui_ -> line_answer_ -> text();
+    qDebug() << "Ответ: " << answer;
     ui_ -> line_answer_ -> clear();
-//  ValidateAnswer
-    ui_ -> table_ -> setRowCount(ui_ -> table_ -> rowCount() + 1);
-    QTableWidgetItem number_item(1);
-    QTableWidgetItem answer_item(answer);
-    ui_ -> table_ -> setItem(1, 0, &number_item);
-    ui_ -> table_ -> setItem(1, 0, &answer_item);
+    QString validate_answer = ValidateEnteredAnswer(answer);
+    qDebug() << validate_answer;
+//    ui_ -> table_ -> setRowCount(ui_ -> table_ -> rowCount() + 1);
+//    QTableWidgetItem number_item(1);
+//    QTableWidgetItem answer_item(answer);
+//    ui_ -> table_ -> setItem(1, 0, &number_item);
+//    ui_ -> table_ -> setItem(1, 0, &answer_item);
 }

@@ -30,6 +30,7 @@ private:
     void GenerateUnknownValue();
     int get_random_value();
     void UpdateLineAnswer();
+    QString ValidateEnteredAnswer(QString &answer) const;
 
 };
 
