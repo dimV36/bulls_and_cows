@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     complexity_level_(0){
     ui_ -> setupUi(this);
     qsrand(QTime::currentTime().second());
-    GenerateUnknownValue();
 }
 
 
@@ -21,6 +20,7 @@ void MainWindow::SetComplexityLevel() {
     LevelComplexityDialog dialog(this);
     dialog.exec();
     complexity_level_ = dialog.get_complexity_level();
+    GenerateUnknownValue();
 }
 
 
@@ -79,6 +79,13 @@ void MainWindow::on_line_answer__returnPressed() {
     ui_ -> line_answer_ -> clear();
     QString validate_answer = ValidateEnteredAnswer(answer);
     qDebug() << validate_answer;
+    ui_ -> table_ -> setRowCount(ui_ -> table_ -> rowCount() + 1);
+    qDebug() << "Строки: " << ui_ -> table_ -> rowCount();
+    //ui_ -> table_ -> setColumnWidth(ui_ -> table_ -> rowCount(), 10);
+    QTableWidgetItem *item_answer = new QTableWidgetItem(answer);
+    QTableWidgetItem *item_validate_answer = new QTableWidgetItem(validate_answer);
+    ui_ -> table_ -> setItem(ui_ -> table_ -> rowCount() - 1, 0, item_answer);
+    ui_ -> table_ -> setItem(ui_ -> table_ -> rowCount() - 1, 1, item_validate_answer);
 //    ui_ -> table_ -> setRowCount(ui_ -> table_ -> rowCount() + 1);
 //    QTableWidgetItem number_item(1);
 //    QTableWidgetItem answer_item(answer);
