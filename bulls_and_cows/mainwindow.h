@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTime>
+#include <QMessageBox>
 #include "levelcomplexitydialog.h"
 
 namespace Ui {
@@ -22,8 +23,8 @@ public:
 
 private slots:
     void on_action_level_complexity_triggered();
-
     void on_line_answer__returnPressed();
+    void on_action_new_game_triggered();
 
 private:
     void SetComplexityLevel();
@@ -31,6 +32,8 @@ private:
     int get_random_value();
     void UpdateLineAnswer();
     QString ValidateEnteredAnswer(QString &answer) const;
+    bool CheckIsUserWin(QString &answer);
+    void StartNewGame();
 
 };
 

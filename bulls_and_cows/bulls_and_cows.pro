@@ -21,3 +21,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     levelcomplexitydialog.ui
+
+RESOURCES += \
+    res/resourses.qrc
