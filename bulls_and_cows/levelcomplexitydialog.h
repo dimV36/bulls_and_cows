@@ -17,6 +17,9 @@ public:
     int get_complexity_level() const;
     void set_complexity_level(const int value);
     
+private slots:
+    void on_button_extra_options__clicked();
+
 private:
     Ui::LevelComplexityDialog *ui_;
 };

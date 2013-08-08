@@ -24,7 +24,6 @@ void MainWindow::SetComplexityLevel() {
     LevelComplexityDialog dialog(this);
     dialog.exec();
     complexity_level_ = dialog.get_complexity_level();
-    GenerateUnknownValue();
 }
 
 
@@ -39,6 +38,7 @@ void MainWindow::GenerateUnknownValue() {
         if (false == generated_value_.contains(generate))
             generated_value_ += generate;
     }
+    qDebug() << generated_value_;
 }
 
 
@@ -83,7 +83,11 @@ bool MainWindow::CheckIsUserWin(QString &answer) {
 
 
 void MainWindow::StartNewGame() {
-    ui_ -> table_ -> clearContents();
+    ui_ -> table_ -> clear();
+    ui_ -> table_ -> setRowCount(0);
+    QStringList headers;
+    headers << tr("Число") << tr("Быки/Коровы");
+    ui_ -> table_ -> setHorizontalHeaderLabels(headers);
     GenerateUnknownValue();
     UpdateLineAnswer();
 }
@@ -91,6 +95,7 @@ void MainWindow::StartNewGame() {
 
 void MainWindow::on_action_level_complexity_triggered() {
     SetComplexityLevel();
+    GenerateUnknownValue();
     UpdateLineAnswer();
 }
 
@@ -114,11 +119,17 @@ void MainWindow::on_line_answer__returnPressed() {
     ui_ -> table_ -> scrollToBottom();
     if (true == CheckIsUserWin(validate_answer)) {
         QMessageBox user_win;
+        user_win.resize(QSize(250, 100));
         user_win.setWindowTitle(tr("Ура!"));
         user_win.setText(tr("<b>Ты выйграла!</b>"));
+        user_win.setInformativeText(tr("Хочешь сыграть ещё?"));
         user_win.setIconPixmap(QPixmap(":/Positive_32x32.png"));
-        user_win.setStandardButtons(QMessageBox::Ok);
-        user_win.exec();
+        user_win.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+        int button_clicked = user_win.exec();
+        if (QMessageBox::Yes == button_clicked)
+            StartNewGame();
+        else
+            return;
     }
 }
 
