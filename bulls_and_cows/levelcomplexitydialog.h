@@ -15,6 +15,8 @@ public:
     explicit LevelComplexityDialog(QWidget *parent = 0);
     ~LevelComplexityDialog();
     int get_complexity_level() const;
+    bool is_extra_options_is_clicked() const;
+    void set_extra_options_clicked(const bool clicked);
     void set_complexity_level(const int value);
     
 private slots:

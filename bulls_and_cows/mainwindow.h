@@ -16,6 +16,7 @@ private:
     Ui::MainWindow *ui_;
     int complexity_level_;
     QString generated_value_;
+    bool extra_options_is_active_;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -34,6 +35,7 @@ private:
     QString ValidateEnteredAnswer(QString &answer) const;
     bool CheckIsUserWin(QString &answer);
     void StartNewGame();
+    void UpdateButtons();
 
 };
 

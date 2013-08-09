@@ -9,7 +9,8 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui_(new Ui::MainWindow),
-    complexity_level_(0) {
+    complexity_level_(0),
+    extra_options_is_active_(false) {
     ui_ -> setupUi(this);
     qsrand(QTime::currentTime().second());
 }
@@ -24,6 +25,7 @@ void MainWindow::SetComplexityLevel() {
     LevelComplexityDialog dialog(this);
     dialog.exec();
     complexity_level_ = dialog.get_complexity_level();
+    extra_options_is_active_ = dialog.is_extra_options_is_clicked();
 }
 
 
@@ -93,10 +95,19 @@ void MainWindow::StartNewGame() {
 }
 
 
+void MainWindow::UpdateButtons() {
+    ui_ -> label_step_ -> setVisible(extra_options_is_active_);
+    ui_ -> label_step_left_ -> setVisible(extra_options_is_active_);
+    ui_ -> label_time_ -> setVisible(extra_options_is_active_);
+    ui_ -> time_left_ -> setVisible(extra_options_is_active_);
+}
+
+
 void MainWindow::on_action_level_complexity_triggered() {
     SetComplexityLevel();
     GenerateUnknownValue();
     UpdateLineAnswer();
+    UpdateButtons();
 }
 
 
@@ -119,10 +130,8 @@ void MainWindow::on_line_answer__returnPressed() {
     ui_ -> table_ -> scrollToBottom();
     if (true == CheckIsUserWin(validate_answer)) {
         QMessageBox user_win;
-        user_win.resize(QSize(250, 100));
         user_win.setWindowTitle(tr("Ура!"));
-        user_win.setText(tr("<b>Ты выйграла!</b>"));
-        user_win.setInformativeText(tr("Хочешь сыграть ещё?"));
+        user_win.setText(tr("<b>Ты выйграла!</b><p>Запустить новую игру?</p>"));
         user_win.setIconPixmap(QPixmap(":/Positive_32x32.png"));
         user_win.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
         int button_clicked = user_win.exec();
