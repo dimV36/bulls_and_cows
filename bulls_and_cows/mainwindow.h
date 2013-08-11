@@ -35,7 +35,7 @@ private:
     QString ValidateEnteredAnswer(QString &answer) const;
     bool CheckIsUserWin(QString &answer);
     void StartNewGame();
-    void UpdateButtons();
+    void SetStepWidgetsHidden(const bool hidden);
 
 };
 

@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     extra_options_is_active_(false) {
     ui_ -> setupUi(this);
     qsrand(QTime::currentTime().second());
+    SetStepWidgetsHidden(true);
 }
 
 
@@ -95,11 +96,9 @@ void MainWindow::StartNewGame() {
 }
 
 
-void MainWindow::UpdateButtons() {
-    ui_ -> label_step_ -> setVisible(extra_options_is_active_);
-    ui_ -> label_step_left_ -> setVisible(extra_options_is_active_);
-    ui_ -> label_time_ -> setVisible(extra_options_is_active_);
-    ui_ -> time_left_ -> setVisible(extra_options_is_active_);
+void MainWindow::SetStepWidgetsHidden(const bool hidden) {
+    ui_ -> label_step_ -> setHidden(hidden);
+    ui_ -> label_step_left_ -> setHidden(hidden);
 }
 
 
@@ -107,7 +106,7 @@ void MainWindow::on_action_level_complexity_triggered() {
     SetComplexityLevel();
     GenerateUnknownValue();
     UpdateLineAnswer();
-    UpdateButtons();
+    SetStepWidgetsHidden(!extra_options_is_active_);
 }
 
 

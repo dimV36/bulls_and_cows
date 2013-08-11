@@ -6,86 +6,135 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>362</width>
-    <height>207</height>
+    <width>365</width>
+    <height>176</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Сложность игры</string>
   </property>
-  <layout class="QGridLayout" name="main_layout_">
-   <item row="0" column="2">
-    <widget class="QSpinBox" name="spin_box_number_">
-     <property name="minimum">
-      <number>2</number>
-     </property>
-     <property name="maximum">
-      <number>9</number>
-     </property>
-    </widget>
-   </item>
+  <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QLabel" name="label_number_">
-     <property name="text">
-      <string>Количество загаданных цифр</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="number_layout_">
+     <item>
+      <widget class="QLabel" name="label_number_">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>300</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>300</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Количество загаданных цифр</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spin_box_number_">
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="minimum">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <number>9</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="5" column="0" colspan="3">
-    <widget class="QDialogButtonBox" name="button_box_">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="3">
+   <item row="1" column="0">
     <widget class="QGroupBox" name="extra_box_">
      <property name="title">
-      <string>Дополнительные опции</string>
+      <string>Включить ограничение на число шагов</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
      </property>
      <layout class="QGridLayout" name="extra_layout_">
       <item row="2" column="0">
-       <widget class="QLabel" name="label_timer_">
-        <property name="text">
-         <string>Ограничение по времени</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QTimeEdit" name="timer_"/>
-      </item>
-      <item row="3" column="0">
        <widget class="QLabel" name="label_step_">
         <property name="text">
          <string>Ограничение на количество шагов</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QSpinBox" name="spin_box_limit_steps_"/>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="spin_box_limit_steps_">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="minimum">
+         <number>2</number>
+        </property>
+        <property name="maximum">
+         <number>20</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="1" column="2">
-    <widget class="QCheckBox" name="button_extra_options_">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_extra_options_">
-     <property name="text">
-      <string>Включить дополнительные опции</string>
-     </property>
-    </widget>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="standart_box_layout_">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="button_box_">
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+       <property name="centerButtons">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>403</width>
-    <height>353</height>
+    <width>388</width>
+    <height>287</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,52 +15,16 @@
   </property>
   <widget class="QWidget" name="central_widget_">
    <layout class="QFormLayout" name="formLayout">
-    <item row="1" column="0" colspan="2">
-     <layout class="QHBoxLayout" name="time_layout_">
-      <item>
-       <widget class="QLabel" name="label_time_">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>120</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Времени осталось:</string>
-        </property>
-        <property name="scaledContents">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTimeEdit" name="time_left_">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>100</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="2" column="0" colspan="2">
+    <property name="fieldGrowthPolicy">
+     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+    </property>
+    <item row="0" column="0" colspan="2">
      <layout class="QHBoxLayout" name="step_layout_">
       <item>
        <widget class="QLabel" name="label_step_">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -70,7 +34,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>120</height>
+          <height>100</height>
          </size>
         </property>
         <property name="text">
@@ -88,8 +52,8 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
-          <height>16777215</height>
+          <width>100</width>
+          <height>100</height>
          </size>
         </property>
         <property name="text">
@@ -99,7 +63,7 @@
       </item>
      </layout>
     </item>
-    <item row="3" column="0" colspan="2">
+    <item row="1" column="0" colspan="2">
      <widget class="QTableWidget" name="table_">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -185,14 +149,14 @@
       </column>
      </widget>
     </item>
-    <item row="4" column="0">
+    <item row="2" column="0">
      <widget class="QLabel" name="label_answer_">
       <property name="text">
        <string>Моё число:</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
+    <item row="2" column="1">
      <widget class="QLineEdit" name="line_answer_"/>
     </item>
    </layout>
@@ -202,7 +166,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>403</width>
+     <width>388</width>
      <height>20</height>
     </rect>
    </property>
@@ -216,15 +180,6 @@
    </widget>
    <addaction name="menu"/>
   </widget>
-  <widget class="QToolBar" name="tool_bar_">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="status_bar_"/>
   <action name="action_level_complexity">
    <property name="text">
     <string>Уровень сложности</string>
