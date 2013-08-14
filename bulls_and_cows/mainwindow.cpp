@@ -5,6 +5,7 @@
 
 #define NUMBER_INDEX    0
 #define ANSWER_INDEX    1
+#define SETTINGS "bulls_and_cows.conf"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,6 +28,11 @@ void MainWindow::SetComplexityLevel() {
     dialog.exec();
     complexity_level_ = dialog.get_complexity_level();
     extra_options_is_active_ = dialog.is_extra_options_is_clicked();
+    if (true == extra_options_is_active_) {
+        SetStepWidgetsHidden(false);
+        ui_ -> label_step_left_ -> setText(QString::number(dialog.get_step_limit()));
+        connect(this, SIGNAL(SignalAnswerWasDone()), this, SLOT(SlotAnswerWasDone()));
+    }
 }
 
 
@@ -102,6 +108,37 @@ void MainWindow::SetStepWidgetsHidden(const bool hidden) {
 }
 
 
+int MainWindow::CreateUserWinDialog() {
+    QMessageBox user_win;
+    user_win.setWindowTitle(tr("Ура!"));
+    user_win.setText(tr("<b>Ты выйграла!</b><p>Запустить новую игру?</p>"));
+    user_win.setIconPixmap(QPixmap(":/Positive_32x32.png"));
+    user_win.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    return user_win.exec();
+}
+
+
+int MainWindow::CreateUserLoseDialog() {
+    QMessageBox user_lose;
+    user_lose.setWindowTitle(tr("Увы!"));
+    user_lose.setText("<b>К сожалению ты проиграла!</b><p>Запустить новую игру?</p>");
+    user_lose.setIconPixmap(QPixmap(":/Negative_32x32.png"));
+    user_lose.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    return user_lose.exec();
+}
+
+
+void MainWindow::WriteSettings() {
+    QSettings settings(SETTINGS, QSettings::NativeFormat);
+
+}
+
+
+void MainWindow::ReadSettings() {
+
+}
+
+
 void MainWindow::on_action_level_complexity_triggered() {
     SetComplexityLevel();
     GenerateUnknownValue();
@@ -126,14 +163,11 @@ void MainWindow::on_line_answer__returnPressed() {
     QTableWidgetItem *item_validate_answer = new QTableWidgetItem(validate_answer);
     ui_ -> table_ -> setItem(ui_ -> table_ -> rowCount() - 1, NUMBER_INDEX, item_answer);
     ui_ -> table_ -> setItem(ui_ -> table_ -> rowCount() - 1, ANSWER_INDEX, item_validate_answer);
+    if (true == extra_options_is_active_)
+        emit SignalAnswerWasDone();
     ui_ -> table_ -> scrollToBottom();
     if (true == CheckIsUserWin(validate_answer)) {
-        QMessageBox user_win;
-        user_win.setWindowTitle(tr("Ура!"));
-        user_win.setText(tr("<b>Ты выйграла!</b><p>Запустить новую игру?</p>"));
-        user_win.setIconPixmap(QPixmap(":/Positive_32x32.png"));
-        user_win.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-        int button_clicked = user_win.exec();
+        int button_clicked = CreateUserWinDialog();
         if (QMessageBox::Yes == button_clicked)
             StartNewGame();
         else
@@ -144,4 +178,17 @@ void MainWindow::on_line_answer__returnPressed() {
 
 void MainWindow::on_action_new_game_triggered() {
     StartNewGame();
+}
+
+
+void MainWindow::SlotAnswerWasDone() {
+    int step_left = ui_ -> label_step_left_ -> text().toInt() - 1;
+    ui_ -> label_step_left_ -> setText(QString::number(step_left));
+    if (0 == step_left) {
+        int button_clicked = CreateUserLoseDialog();
+        if (QMessageBox::Yes == button_clicked)
+            StartNewGame();
+        else
+            return;
+    }
 }

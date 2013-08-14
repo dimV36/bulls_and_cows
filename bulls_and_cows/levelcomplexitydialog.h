@@ -18,6 +18,8 @@ public:
     bool is_extra_options_is_clicked() const;
     void set_extra_options_clicked(const bool clicked);
     void set_complexity_level(const int value);
+    int get_step_limit() const;
+    void set_step_limit(const int value);
 
 private:
     Ui::LevelComplexityDialog *ui_;

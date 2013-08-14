@@ -32,3 +32,13 @@ void LevelComplexityDialog::set_extra_options_clicked(const bool clicked) {
     ui_ -> extra_box_ -> setChecked(clicked);
 }
 
+
+int LevelComplexityDialog::get_step_limit() const {
+    return ui_ -> spin_box_limit_steps_ -> value();
+}
+
+
+void LevelComplexityDialog::set_step_limit(const int value) {
+    ui_ -> spin_box_limit_steps_ -> setValue(value);
+}
+

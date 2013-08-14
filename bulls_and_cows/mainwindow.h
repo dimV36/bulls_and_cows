@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTime>
 #include <QMessageBox>
+#include <QSettings>
 #include "levelcomplexitydialog.h"
 
 namespace Ui {
@@ -36,6 +37,16 @@ private:
     bool CheckIsUserWin(QString &answer);
     void StartNewGame();
     void SetStepWidgetsHidden(const bool hidden);
+    int CreateUserWinDialog();
+    int CreateUserLoseDialog();
+    void WriteSettings();
+    void ReadSettings();
+
+signals:
+    void SignalAnswerWasDone();
+
+private slots:
+    void SlotAnswerWasDone();
 
 };
 

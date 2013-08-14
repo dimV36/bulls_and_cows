@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>Positive_32x32.png</file>
+        <file>Negative_32x32.png</file>
     </qresource>
 </RCC>
