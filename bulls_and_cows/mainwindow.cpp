@@ -5,16 +5,18 @@
 
 #define NUMBER_INDEX    0
 #define ANSWER_INDEX    1
-#define SETTINGS "bulls_and_cows.conf"
+#define MAIN_SETTINGS "mainwindow"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui_(new Ui::MainWindow),
     complexity_level_(0),
-    extra_options_is_active_(false) {
+    extra_options_is_active_(false),
+    main_settings_("dimv36", "bulls_and_cows", this) {
     ui_ -> setupUi(this);
     qsrand(QTime::currentTime().second());
     SetStepWidgetsHidden(true);
+    ReadSettings();
 }
 
 
@@ -23,23 +25,32 @@ MainWindow::~MainWindow() {
 }
 
 
-void MainWindow::SetComplexityLevel() {
+bool MainWindow::SetComplexityLevel() {
     LevelComplexityDialog dialog(this);
-    dialog.exec();
-    complexity_level_ = dialog.get_complexity_level();
-    extra_options_is_active_ = dialog.is_extra_options_is_clicked();
-    if (true == extra_options_is_active_) {
-        SetStepWidgetsHidden(false);
-        ui_ -> label_step_left_ -> setText(QString::number(dialog.get_step_limit()));
-        connect(this, SIGNAL(SignalAnswerWasDone()), this, SLOT(SlotAnswerWasDone()));
-    }
+    if (QDialog::Accepted == dialog.exec()) {
+        complexity_level_ = dialog.get_complexity_level();
+        extra_options_is_active_ = dialog.is_extra_options_is_clicked();
+        if (true == extra_options_is_active_) {
+            SetStepWidgetsHidden(false);
+            ui_ -> label_step_left_ -> setText(QString::number(dialog.get_step_limit()));
+            connect(this, SIGNAL(SignalAnswerWasDone()), this, SLOT(SlotAnswerWasDone()));
+        } else {
+            SetStepWidgetsHidden(true);
+            disconnect(this, SIGNAL(SignalAnswerWasDone()), this, SLOT(SlotAnswerWasDone()));
+        }
+        WriteSettings();
+        return true;
+    } else
+        return false;
 }
 
 
 void MainWindow::GenerateUnknownValue() {
     if (0 == complexity_level_) {
-        SetComplexityLevel();
-        UpdateLineAnswer();
+        if (true == SetComplexityLevel())
+            UpdateLineAnswer();
+        else
+            return;
     }
     generated_value_ = QString::number(get_random_value());
     while (generated_value_.length() != complexity_level_) {
@@ -98,6 +109,8 @@ void MainWindow::StartNewGame() {
     headers << tr("Число") << tr("Быки/Коровы");
     ui_ -> table_ -> setHorizontalHeaderLabels(headers);
     GenerateUnknownValue();
+    if (true == extra_options_is_active_)
+        ui_ -> label_step_left_ -> setText(get_setting("step_left").toString());
     UpdateLineAnswer();
 }
 
@@ -129,13 +142,36 @@ int MainWindow::CreateUserLoseDialog() {
 
 
 void MainWindow::WriteSettings() {
-    QSettings settings(SETTINGS, QSettings::NativeFormat);
-
+    main_settings_.beginGroup(MAIN_SETTINGS);
+    main_settings_.setValue("position", pos());
+    main_settings_.setValue("size", size());
+    main_settings_.setValue("is_step_left_enabled", ui_ -> label_step_left_ -> isHidden());
+    main_settings_.setValue("step_left", ui_ -> label_step_left_ -> text());
+    main_settings_.endGroup();
 }
 
 
 void MainWindow::ReadSettings() {
+    main_settings_.beginGroup(MAIN_SETTINGS);
+    resize(main_settings_.value("size").toSize());
+    move(main_settings_.value("position").toPoint());
+    extra_options_is_active_ = main_settings_.value("is_step_left_enabled").toBool();
+    ui_ -> label_step_left_ -> setText(main_settings_.value("step_left").toString());
+    main_settings_.endGroup();
+}
 
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    WriteSettings();
+    event -> accept();
+}
+
+
+QVariant MainWindow::get_setting(const QString key)  {
+    main_settings_.beginGroup(MAIN_SETTINGS);
+    QVariant setting = main_settings_.value(key);
+    main_settings_.endGroup();
+    return setting;
 }
 
 
@@ -181,6 +217,7 @@ void MainWindow::on_action_new_game_triggered() {
 }
 
 
+
 void MainWindow::SlotAnswerWasDone() {
     int step_left = ui_ -> label_step_left_ -> text().toInt() - 1;
     ui_ -> label_step_left_ -> setText(QString::number(step_left));
@@ -192,3 +229,5 @@ void MainWindow::SlotAnswerWasDone() {
             return;
     }
 }
+
+

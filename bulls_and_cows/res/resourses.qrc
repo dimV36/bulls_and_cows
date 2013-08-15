@@ -2,5 +2,10 @@
     <qresource prefix="/">
         <file>Positive_32x32.png</file>
         <file>Negative_32x32.png</file>
+        <file>Exec_32x32.png</file>
+        <file>Logout_32x32.png</file>
+        <file>New_32x32.png</file>
+        <file>Bulls_128x128.png</file>
+        <file>photo.jpg</file>
     </qresource>
 </RCC>

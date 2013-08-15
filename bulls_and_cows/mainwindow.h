@@ -5,6 +5,7 @@
 #include <QTime>
 #include <QMessageBox>
 #include <QSettings>
+#include <QCloseEvent>
 #include "levelcomplexitydialog.h"
 
 namespace Ui {
@@ -18,6 +19,7 @@ private:
     int complexity_level_;
     QString generated_value_;
     bool extra_options_is_active_;
+    QSettings main_settings_;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
@@ -29,7 +31,7 @@ private slots:
     void on_action_new_game_triggered();
 
 private:
-    void SetComplexityLevel();
+    bool SetComplexityLevel();
     void GenerateUnknownValue();
     int get_random_value();
     void UpdateLineAnswer();
@@ -41,13 +43,14 @@ private:
     int CreateUserLoseDialog();
     void WriteSettings();
     void ReadSettings();
+    void closeEvent(QCloseEvent *event);
+    QVariant get_setting(const QString key);
 
 signals:
     void SignalAnswerWasDone();
 
 private slots:
     void SlotAnswerWasDone();
-
 };
 
 #endif // MAINWINDOW_H

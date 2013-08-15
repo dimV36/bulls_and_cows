@@ -2,6 +2,7 @@
 #define LEVELCOMPLEXITYDIALOG_H
 
 #include <QDialog>
+#include <QSettings>
 
 namespace Ui {
 class LevelComplexityDialog;
@@ -16,11 +17,16 @@ public:
     ~LevelComplexityDialog();
     int get_complexity_level() const;
     bool is_extra_options_is_clicked() const;
-    void set_extra_options_clicked(const bool clicked);
-    void set_complexity_level(const int value);
     int get_step_limit() const;
-    void set_step_limit(const int value);
 
+private:
+    void WriteSettings();
+    void ReadSettings();
+    void set_complexity_level(const int level);
+    void set_extra_options(const bool is_checked);
+    void set_step_limit(const int step_limit);
+
+    
 private:
     Ui::LevelComplexityDialog *ui_;
 };

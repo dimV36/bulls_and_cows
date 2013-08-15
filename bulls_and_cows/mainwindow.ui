@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>388</width>
+    <width>283</width>
     <height>287</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>450</width>
+    <height>300</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Игра &quot;Быки и коровы&quot;</string>
@@ -166,7 +172,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>388</width>
+     <width>283</width>
      <height>20</height>
     </rect>
    </property>
@@ -181,16 +187,28 @@
    <addaction name="menu"/>
   </widget>
   <action name="action_level_complexity">
+   <property name="icon">
+    <iconset resource="res/resourses.qrc">
+     <normaloff>:/Exec_32x32.png</normaloff>:/Exec_32x32.png</iconset>
+   </property>
    <property name="text">
     <string>Уровень сложности</string>
    </property>
   </action>
   <action name="action_exit">
+   <property name="icon">
+    <iconset resource="res/resourses.qrc">
+     <normaloff>:/Logout_32x32.png</normaloff>:/Logout_32x32.png</iconset>
+   </property>
    <property name="text">
     <string>Выход</string>
    </property>
   </action>
   <action name="action_new_game">
+   <property name="icon">
+    <iconset resource="res/resourses.qrc">
+     <normaloff>:/New_32x32.png</normaloff>:/New_32x32.png</iconset>
+   </property>
    <property name="text">
     <string>Новая игра</string>
    </property>
@@ -200,23 +218,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
- <connections>
-  <connection>
-   <sender>action_exit</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>209</x>
-     <y>148</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <resources>
+  <include location="res/resourses.qrc"/>
+ </resources>
+ <connections/>
 </ui>
