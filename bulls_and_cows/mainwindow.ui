@@ -230,6 +230,10 @@
    </property>
   </action>
   <action name="action_press_me">
+   <property name="icon">
+    <iconset resource="res/resourses.qrc">
+     <normaloff>:/Amor_32x32.png</normaloff>:/Amor_32x32.png</iconset>
+   </property>
    <property name="text">
     <string>Нажми меня!</string>
    </property>

@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QDebug>
-
 #define NUMBER_INDEX    0
 #define ANSWER_INDEX    1
 #define MAIN_SETTINGS "mainwindow"
@@ -58,7 +56,6 @@ void MainWindow::GenerateUnknownValue() {
         if (false == generated_value_.contains(generate))
             generated_value_ += generate;
     }
-    qDebug() << generated_value_;
 }
 
 
