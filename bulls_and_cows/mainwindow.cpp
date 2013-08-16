@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QDebug>
+
 #define NUMBER_INDEX    0
 #define ANSWER_INDEX    1
 #define MAIN_SETTINGS "mainwindow"
@@ -56,6 +58,7 @@ void MainWindow::GenerateUnknownValue() {
         if (false == generated_value_.contains(generate))
             generated_value_ += generate;
     }
+    qDebug() << generated_value_;
 }
 
 
@@ -75,15 +78,30 @@ QString MainWindow::ValidateEnteredAnswer(QString &answer) const {
     int bulls = 0;
     int cows = 0;
     for (int i = 0; i < generated_value_.length(); i++) {
-        QString digit = generated_value_[i];
-        if (true == answer.contains(digit))
-            cows += 1;
-        if (answer.indexOf(digit) == generated_value_.indexOf(digit)) {
-            cows -= 1;
-            bulls += 1;
-        }
-    }  
+        QPair <int, int> pair = CheckAnswer(answer, i);
+        bulls += pair.first;
+        cows += pair.second;
+    }
     return QString("%1Б %2К").arg(bulls).arg(cows);
+}
+
+
+QPair<int, int> MainWindow::CheckAnswer(QString &answer, int index) const {
+    QString digit = QString(generated_value_[index]);
+    QPair<int, int> result;
+    if (answer.indexOf(digit) == generated_value_.indexOf(digit)) {
+        result.first = 1;
+        result.second = 0;
+        return result;
+    }
+    if (true == answer.contains(digit)) {
+        result.first = 0;
+        result.second = 1;
+    } else {
+        result.first = 0;
+        result.second = 0;
+    }
+    return result;
 }
 
 
