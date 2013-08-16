@@ -14,13 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    levelcomplexitydialog.cpp
+    levelcomplexitydialog.cpp \
+    aboutthisdialog.cpp
 
 HEADERS  += mainwindow.h \
-    levelcomplexitydialog.h
+    levelcomplexitydialog.h \
+    aboutthisdialog.h
 
 FORMS    += mainwindow.ui \
-    levelcomplexitydialog.ui
+    levelcomplexitydialog.ui \
+    aboutthisdialog.ui
 
 RESOURCES += \
     res/resourses.qrc

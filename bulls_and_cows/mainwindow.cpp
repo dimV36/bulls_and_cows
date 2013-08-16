@@ -231,3 +231,14 @@ void MainWindow::SlotAnswerWasDone() {
 }
 
 
+void MainWindow::on_action_version_triggered() {
+    QMessageBox::about(this,
+                       tr("Быки и коровы"),
+                       tr("Версия игры - 1.0. <br> Разработана в августе 2013 г."));
+}
+
+
+void MainWindow::on_action_press_me_triggered() {
+    AboutThisDialog dialog(this);
+    dialog.exec();
+}

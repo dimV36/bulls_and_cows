@@ -184,7 +184,15 @@
     <addaction name="action_level_complexity"/>
     <addaction name="action_exit"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>О программе</string>
+    </property>
+    <addaction name="action_press_me"/>
+    <addaction name="action_version"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <action name="action_level_complexity">
    <property name="icon">
@@ -214,6 +222,16 @@
    </property>
    <property name="toolTip">
     <string>Начать новую игру</string>
+   </property>
+  </action>
+  <action name="action_version">
+   <property name="text">
+    <string>Версия</string>
+   </property>
+  </action>
+  <action name="action_press_me">
+   <property name="text">
+    <string>Нажми меня!</string>
    </property>
   </action>
  </widget>

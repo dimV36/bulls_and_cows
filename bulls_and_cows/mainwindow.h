@@ -7,6 +7,7 @@
 #include <QSettings>
 #include <QCloseEvent>
 #include "levelcomplexitydialog.h"
+#include "aboutthisdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -51,6 +52,8 @@ signals:
 
 private slots:
     void SlotAnswerWasDone();
+    void on_action_version_triggered();
+    void on_action_press_me_triggered();
 };
 
 #endif // MAINWINDOW_H

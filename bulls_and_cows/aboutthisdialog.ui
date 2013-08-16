@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutThisDialog</class>
+ <widget class="QDialog" name="AboutThisDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>477</width>
+    <height>287</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Любимой Машульке</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res/resourses.qrc">
+    <normaloff>:/Amor_32x32.png</normaloff>:/Amor_32x32.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="main_layout_">
+   <item row="1" column="1">
+    <widget class="QDialogButtonBox" name="button_box_">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+     <property name="centerButtons">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_picture_">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QTextEdit" name="text_">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Машулька, моя прекрасная девочка!&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Вот уже прошел почти год с момента нашей встречи. Он пролетел незаметно, молниеносно, но фантастично и красиво. Случаются чудеса в жизни, с тобой это я понял впервые. Ты стала путеводной звездой в моих начинаниях и стала абсолютно всем в моей жизни. Ты - моя душа и моё сердце! Как прекрасно любить и быть любимым!&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Люблю тебя, и это не секрет,&lt;br /&gt;И наперед я знаю твой ответ,&lt;br /&gt;Я знаю о взаимности любви,&lt;br /&gt;Но все равно меня ты позови.&lt;br /&gt;Хочу услышать нежный голос твой,&lt;br /&gt;Хочу тебя коснуться я рукой.&lt;br /&gt;Ты — нежная, любимая моя,&lt;br /&gt;И лишь с тобою буду счастлив я!  &lt;a name=&quot;ctrlcopy&quot;&gt;&lt;/a&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a name=&quot;ctrlcopy&quot;&gt;&lt;/a&gt;ЛЮБЛЮ ТЕБЯ, МАШУЛЬКА!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="res/resourses.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>button_box_</sender>
+   <signal>accepted()</signal>
+   <receiver>AboutThisDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_box_</sender>
+   <signal>rejected()</signal>
+   <receiver>AboutThisDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
