@@ -6,7 +6,6 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QCloseEvent>
-#include <QPair>
 #include "levelcomplexitydialog.h"
 #include "aboutthisdialog.h"
 
@@ -38,7 +37,6 @@ private:
     int get_random_value();
     void UpdateLineAnswer();
     QString ValidateEnteredAnswer(QString &answer) const;
-    QPair<int, int> CheckAnswer(QString &answer, int index) const;
     bool CheckIsUserWin(QString &answer);
     void StartNewGame();
     void SetStepWidgetsHidden(const bool hidden);

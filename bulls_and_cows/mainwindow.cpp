@@ -68,40 +68,27 @@ int MainWindow::get_random_value() {
 
 
 void MainWindow::UpdateLineAnswer() {
+    ui_ -> line_answer_ -> setEnabled(true);
     QIntValidator *validator = new QIntValidator(ui_ -> line_answer_);
     ui_ -> line_answer_ -> setValidator(validator);
     ui_ -> line_answer_ -> setMaxLength(complexity_level_);
 }
 
 
+
 QString MainWindow::ValidateEnteredAnswer(QString &answer) const {
     int bulls = 0;
     int cows = 0;
     for (int i = 0; i < generated_value_.length(); i++) {
-        QPair <int, int> pair = CheckAnswer(answer, i);
-        bulls += pair.first;
-        cows += pair.second;
+        QString digit = QString(answer[i]);
+        if (true == generated_value_.contains(digit)) {
+            if (answer.at(i) == generated_value_.at(i))
+                bulls += 1;
+            else
+                cows += 1;
+        }
     }
     return QString("%1Б %2К").arg(bulls).arg(cows);
-}
-
-
-QPair<int, int> MainWindow::CheckAnswer(QString &answer, int index) const {
-    QString digit = QString(generated_value_[index]);
-    QPair<int, int> result;
-    if (answer.indexOf(digit) == generated_value_.indexOf(digit)) {
-        result.first = 1;
-        result.second = 0;
-        return result;
-    }
-    if (true == answer.contains(digit)) {
-        result.first = 0;
-        result.second = 1;
-    } else {
-        result.first = 0;
-        result.second = 0;
-    }
-    return result;
 }
 
 
