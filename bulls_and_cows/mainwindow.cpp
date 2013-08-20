@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     extra_options_is_active_(false),
     main_settings_("dimv36", "bulls_and_cows", this) {
     ui_ -> setupUi(this);
+    connect(this, SIGNAL(SignalComplexityLevelIsSet()), this, SLOT(SlotComplexityLevelIsSet()));
     qsrand(QTime::currentTime().second());
     SetStepWidgetsHidden(true);
     ReadSettings();
@@ -39,6 +40,7 @@ bool MainWindow::SetComplexityLevel() {
             disconnect(this, SIGNAL(SignalAnswerWasDone()), this, SLOT(SlotAnswerWasDone()));
         }
         WriteSettings();
+        emit SignalComplexityLevelIsSet();
         return true;
     } else
         return false;
@@ -46,12 +48,6 @@ bool MainWindow::SetComplexityLevel() {
 
 
 void MainWindow::GenerateUnknownValue() {
-    if (0 == complexity_level_) {
-        if (true == SetComplexityLevel())
-            UpdateLineAnswer();
-        else
-            return;
-    }
     generated_value_ = QString::number(get_random_value());
     while (generated_value_.length() != complexity_level_) {
         QString generate = QString::number(get_random_value());
@@ -69,8 +65,7 @@ int MainWindow::get_random_value() {
 
 void MainWindow::UpdateLineAnswer() {
     ui_ -> line_answer_ -> setEnabled(true);
-    QIntValidator *validator = new QIntValidator(ui_ -> line_answer_);
-    ui_ -> line_answer_ -> setValidator(validator);
+    ui_ -> line_answer_ -> setValidator(new IntValidator());
     ui_ -> line_answer_ -> setMaxLength(complexity_level_);
 }
 
@@ -178,10 +173,15 @@ QVariant MainWindow::get_setting(const QString key)  {
 
 
 void MainWindow::on_action_level_complexity_triggered() {
-    SetComplexityLevel();
-    GenerateUnknownValue();
-    UpdateLineAnswer();
-    SetStepWidgetsHidden(!extra_options_is_active_);
+    if (true == SetComplexityLevel()) {
+        UpdateLineAnswer();
+        ui_ -> action_new_game -> setEnabled(true);
+    } else
+        return;
+    if (true == extra_options_is_active_)
+        SetStepWidgetsHidden(false);
+    else
+        SetStepWidgetsHidden(true);
 }
 
 
@@ -233,6 +233,11 @@ void MainWindow::SlotAnswerWasDone() {
 }
 
 
+void MainWindow::SlotComplexityLevelIsSet() {
+    GenerateUnknownValue();
+}
+
+
 void MainWindow::on_action_version_triggered() {
     QMessageBox::about(this,
                        tr("Быки и коровы"),
@@ -243,4 +248,10 @@ void MainWindow::on_action_version_triggered() {
 void MainWindow::on_action_press_me_triggered() {
     AboutThisDialog dialog(this);
     dialog.exec();
+}
+
+
+void MainWindow::on_action_exit_triggered() {
+    WriteSettings();
+    exit(0);
 }

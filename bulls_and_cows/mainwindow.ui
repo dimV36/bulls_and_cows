@@ -188,7 +188,7 @@
     <addaction name="action_level_complexity"/>
     <addaction name="action_exit"/>
    </widget>
-   <widget class="QMenu" name="menu_2">
+   <widget class="QMenu" name="program_menu">
     <property name="title">
      <string>О программе</string>
     </property>
@@ -196,7 +196,7 @@
     <addaction name="action_version"/>
    </widget>
    <addaction name="menu"/>
-   <addaction name="menu_2"/>
+   <addaction name="program_menu"/>
   </widget>
   <action name="action_level_complexity">
    <property name="icon">
@@ -217,6 +217,9 @@
    </property>
   </action>
   <action name="action_new_game">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="res/resourses.qrc">
      <normaloff>:/New_32x32.png</normaloff>:/New_32x32.png</iconset>
