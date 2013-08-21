@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QDebug>
-
 #define NUMBER_INDEX    0
 #define ANSWER_INDEX    1
 #define MAIN_SETTINGS "mainwindow"
@@ -54,7 +52,6 @@ void MainWindow::GenerateUnknownValue() {
         if (false == generated_value_.contains(generate))
             generated_value_ += generate;
     }
-    qDebug() << generated_value_;
 }
 
 
@@ -65,7 +62,6 @@ int MainWindow::get_random_value() {
 
 void MainWindow::UpdateLineAnswer() {
     ui_ -> line_answer_ -> setEnabled(true);
-    //ui_ -> line_answer_ -> setValidator(new IntValidator());
     ui_ -> line_answer_ -> setValidator(new QIntValidator());
     ui_ -> line_answer_ -> setMaxLength(complexity_level_);
 }
@@ -76,7 +72,6 @@ QString MainWindow::ValidateEnteredAnswer(QString &answer) const {
     int bulls = 0;
     int cows = 0;
     QStringList digit_list = CreateDigitList(answer);
-    qDebug() << digit_list;
     for (int i = 0; i < digit_list.size(); i++) {
         QString digit = digit_list.at(i);
         if (true == generated_value_.contains(digit)) {
@@ -85,14 +80,6 @@ QString MainWindow::ValidateEnteredAnswer(QString &answer) const {
             else
                 cows += 1;
         }
-//    for (int i = 0; i < generated_value_.length(); i++) {
-//        QString digit = QString(answer[i]);
-//        if (true == generated_value_.contains(digit)) {
-//            if (answer.at(i) == generated_value_.at(i))
-//                bulls += 1;
-//            else
-//                cows += 1;
-//        }
     }
     return QString("%1Б %2К").arg(bulls).arg(cows);
 }

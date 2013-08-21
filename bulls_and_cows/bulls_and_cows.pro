@@ -15,13 +15,11 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     levelcomplexitydialog.cpp \
-    aboutthisdialog.cpp \
-    intvalidator.cpp
+    aboutthisdialog.cpp
 
 HEADERS  += mainwindow.h \
     levelcomplexitydialog.h \
-    aboutthisdialog.h \
-    intvalidator.h
+    aboutthisdialog.h
 
 FORMS    += mainwindow.ui \
     levelcomplexitydialog.ui \

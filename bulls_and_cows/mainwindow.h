@@ -8,7 +8,6 @@
 #include <QCloseEvent>
 #include "levelcomplexitydialog.h"
 #include "aboutthisdialog.h"
-#include "intvalidator.h"
 
 namespace Ui {
 class MainWindow;
