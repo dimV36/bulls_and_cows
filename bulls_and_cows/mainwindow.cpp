@@ -65,7 +65,8 @@ int MainWindow::get_random_value() {
 
 void MainWindow::UpdateLineAnswer() {
     ui_ -> line_answer_ -> setEnabled(true);
-    ui_ -> line_answer_ -> setValidator(new IntValidator());
+    //ui_ -> line_answer_ -> setValidator(new IntValidator());
+    ui_ -> line_answer_ -> setValidator(new QIntValidator());
     ui_ -> line_answer_ -> setMaxLength(complexity_level_);
 }
 
@@ -74,16 +75,46 @@ void MainWindow::UpdateLineAnswer() {
 QString MainWindow::ValidateEnteredAnswer(QString &answer) const {
     int bulls = 0;
     int cows = 0;
-    for (int i = 0; i < generated_value_.length(); i++) {
-        QString digit = QString(answer[i]);
+    QStringList digit_list = CreateDigitList(answer);
+    qDebug() << digit_list;
+    for (int i = 0; i < digit_list.size(); i++) {
+        QString digit = digit_list.at(i);
         if (true == generated_value_.contains(digit)) {
-            if (answer.at(i) == generated_value_.at(i))
+            if (true == IsBull(answer, digit))
                 bulls += 1;
             else
                 cows += 1;
         }
+//    for (int i = 0; i < generated_value_.length(); i++) {
+//        QString digit = QString(answer[i]);
+//        if (true == generated_value_.contains(digit)) {
+//            if (answer.at(i) == generated_value_.at(i))
+//                bulls += 1;
+//            else
+//                cows += 1;
+//        }
     }
     return QString("%1Б %2К").arg(bulls).arg(cows);
+}
+
+
+QStringList MainWindow::CreateDigitList(QString &number) const {
+    QStringList result;
+    for (int i = 0; i < number.size(); i++) {
+        QString digit = QString(number.at(i));
+        if (false == result.contains(digit))
+            result.push_back(digit);
+    }
+    return result;
+}
+
+
+bool MainWindow::IsBull(QString &answer, QString &digit) const {
+    for (int i = 0; i < generated_value_.size(); i++) {
+        if ((answer.at(i) == generated_value_.at(i)) && (generated_value_.at(i) == digit))
+            return true;
+    }
+    return false;
 }
 
 

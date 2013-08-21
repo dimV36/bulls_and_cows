@@ -38,6 +38,8 @@ private:
     int get_random_value();
     void UpdateLineAnswer();
     QString ValidateEnteredAnswer(QString &answer) const;
+    QStringList CreateDigitList(QString &number) const;
+    bool IsBull(QString &answer, QString &digit) const;
     bool CheckIsUserWin(QString &answer);
     void StartNewGame();
     void SetStepWidgetsHidden(const bool hidden);
